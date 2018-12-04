@@ -27,6 +27,7 @@ import pandas as pd
 import numpy as np
 import warnings
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 
 warnings.filterwarnings("ignore")
 
@@ -77,7 +78,20 @@ for model in models:
     print(precision_score(y_test, y_pred, average='macro')) 
     print(accuracy_score(y_test, y_pred))
     print(confusion_matrix(y_test,y_pred))
-        
-
-
+    
+    
+    labels=[0,1,-1]
+    cm = confusion_matrix(y_test, y_pred, labels)
+    print(cm)
+    
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    cax = ax.matshow(cm)
+    plt.title('Confusion matrix of the classifier')
+    fig.colorbar(cax)
+    ax.set_xticklabels([''] + labels)
+    ax.set_yticklabels([''] + labels)
+    plt.xlabel('Predicted')
+    plt.ylabel('True')
+    plt.show()
 
